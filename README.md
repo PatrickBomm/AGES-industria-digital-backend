@@ -87,37 +87,31 @@ Antes de configurar o ambiente, você precisará instalar algumas ferramentas:
    pyenv install 3.12
    ```
 
-3. Entre na pasta do projeto `industria_digital_backend`:
-   ```bash
-   cd industria_digital_backend
-   ```
-
-4. Instale as dependências do projeto e ative o ambiente virtual:
+3. Instale as dependências do projeto e ative o ambiente virtual:
    ```bash
    poetry install
-   poetry shell
    ```
 
-5. Instale o FastAPI com as dependências recomendadas:
-   ```bash
-   pip install "fastapi[standard]"
-   ```
+4. Create the Docker volume (only need to be done the first time):
+    ```bash
+    docker volume create industria-digital-db
+    ```
 
 ## Executando o Projeto Localmente
 
 Para rodar o servidor localmente:
 
-1. Ative o ambiente virtual com Poetry:
-   ```bash
-   poetry shell
-   ```
+1. Run the Docker compose file (Database):
+    ```bash
+    docker compose up
+    ```
 
 2. Inicie o servidor FastAPI:
    ```bash
-   fastapi dev ./industria_digital_backend/main.py
+   poetry run uvicorn app.main:app --reload
    ```
 
 ## Estrutura do Projeto
 
 - `main.py`: Ponto de entrada do aplicativo FastAPI.
-- `industria_digital_backend/`: Contém a lógica do backend, incluindo os endpoints e a configuração do banco de dados.
+- `app/`: Contém a lógica do backend, incluindo os endpoints e a configuração do banco de dados.
