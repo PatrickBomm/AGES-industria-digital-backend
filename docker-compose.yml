@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    volumes:
+      - ./app:/usr/src/app/app
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
+    depends_on:
+      - postgresql
+    environment:
+      - DATABASE_URL=postgresql://industria-digital:a12345678@postgresql:5432/industria-digital_db
+
+  postgresql:
+    image: postgres
+    restart: always
+    container_name: industria-digital-postgresql
+    environment:
+      - POSTGRES_USER=industria-digital
+      - POSTGRES_PASSWORD=a12345678
+      - POSTGRES_DB=industria-digital_db
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    volumes:
+      - industria-digital-db:/var/lib/postgresql/data
+      - ./sampled_cnpj_db.pgsql:/docker-entrypoint-initdb.d/dump.pgsql
+
+volumes:
+  industria-digital-db:
