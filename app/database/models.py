@@ -1,9 +1,9 @@
+from datetime import datetime
 from typing import List
 from sqlalchemy import ForeignKey
 from sqlalchemy import Column
 from sqlalchemy import Table
 from sqlalchemy import Boolean
-from sqlalchemy import Date
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from .database import Base
 
@@ -12,8 +12,8 @@ estabelecimento_cnae = Table(
     "estabelecimento_cnaes",
     Base.metadata,
     Column("estabelecimento_uid", ForeignKey("estabelecimentos.uid"), primary_key=True),
-    Column("cnae_id", ForeignKey("cnaes.id"), primary_key=True),
-    Column("primario",Boolean, nulable=False)
+    Column("cnae_id", ForeignKey("cnaes.cnae_id"), primary_key=True),
+    Column("primario",Boolean, nullable=False)
 )
     
 
@@ -29,7 +29,7 @@ class Estabelecimento(Base):
     nome_fantasia: Mapped[str|None]
     situacao_cadastral: Mapped[int|None]
     pais: Mapped[str|None]
-    data_inicio_atividade: Mapped[Date|None]
+    data_inicio_atividade: Mapped[datetime|None]
     tipo_logradouro: Mapped[str|None]
     logradouro: Mapped[str|None]
     numero: Mapped[str|None]
