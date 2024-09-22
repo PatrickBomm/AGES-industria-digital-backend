@@ -31,7 +31,7 @@ class EstabelecimentoCnae(Base):
 
 # Example queries
 
-# session = Session(engine)
+session = Session(engine)
 
 # query = select(Cnae)
 
